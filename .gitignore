@@ -1,0 +1,43 @@
+/Backend/node_modules
+/Backend/public/hot
+/Backend/public/storage
+/Backend/storage/*.key
+/Backend/vendor
+/Backend/.env
+/Backend/.env.backup
+
+/Frontend/npm-debug.log
+/Frontend/yarn-error.log
+
+#test editor
+/Backend/.vscode
+/Backend/.idea
+/Frontend/.vscode
+/Frontend/.idea
+
+
+
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+Frontend/node_modules
+Frontend/.pnp
+Frontend.pnp.js
+
+# testing
+Frontend/coverage
+
+# production
+Frontend/build
+
+Frontend/.env
+# misc
+Frontend/.DS_Store
+Frontend/.env.local
+Frontend/.env.development.local
+Frontend/.env.test.local
+Frontend/.env.production.local
+
+Frontend/npm-debug.log*
+Frontend/yarn-debug.log*
+Frontend/yarn-error.log*
