@@ -28,8 +28,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/update-dp', 'App\Http\Controllers\Whatsapp\AuthController@updateUserDp');
 
     // Messaging Endpoints
+    Route::get('/message/file/{id}', 'App\Http\Controllers\Whatsapp\WossopMessageController@fetchFile');
+    Route::get('/message/file-info/{id}', 'App\Http\Controllers\Whatsapp\WossopMessageController@fetchFileInfo');
     Route::post('/message', 'App\Http\Controllers\Whatsapp\WossopMessageController@sendMessage');
-    Route::get('/message/{id}', 'App\Http\Controllers\Whatsapp\WossopMessageController@fetchUserMessages');
+    Route::get('/message/{id}/{is_group?}', 'App\Http\Controllers\Whatsapp\WossopMessageController@fetchUserMessages');
 });
 Route::post('/register', 'App\Http\Controllers\Whatsapp\AuthController@register');
 Route::post('/login', 'App\Http\Controllers\Whatsapp\AuthController@login');

@@ -8,6 +8,8 @@ use App\Events\SendPrivateWossopMessage;
 use App\Models\WossopMessage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\FileAttempt;
+
 
 class WossopMessageController extends Controller
 {
@@ -20,21 +22,42 @@ class WossopMessageController extends Controller
      */
     public function sendMessage(Request $request)
     {
-        $receiver = $request->receiver_id;
-        $sender = Auth::id();
-        $message = $request->message;
+            $new_message = new WossopMessage();
+            $new_message->receiver = $request->receiver_id;
+            $new_message->sender = $sender = Auth::id();
+            $new_message->is_group= $request->is_group;
+            $new_message->is_read = 0;
 
-        $new_message = new WossopMessage();
-        $new_message->sender = $sender;
-        $new_message->receiver = $receiver;
-        $new_message->message = $message;
-        $new_message->is_read = 0;
+        /*Thanh*/
+        if ($request->hasFile('file')) {
+            $new_message->message = $this->saveFile($request);
+            $new_message->is_file = 1;
+        }
+        else {
+            $new_message->message = $request->message;
+            $new_message->is_file=0;
+        }
+            $new_message->save();
+    }
 
-        $new_message->save();
+    public function saveFile(Request $request)
+    {
+        
+            $file = $request->file('file');
+            $origin_name = $file->getClientOriginalName();
+            $extension = $file->extension();
+            $stored_path =  explode("/", $file->store('public'));
+            $content_type = $file->getClientMimeType();
 
-        // event(new SendWossopMessage($new_message));
+            $file_attempt = new FileAttempt();
 
-        event(new SendPrivateWossopMessage(($new_message)));
+            $file_attempt->origin_name = $origin_name;
+            $file_attempt->extension = $extension;
+            $file_attempt->stored_path = $stored_path[1];
+            $file_attempt->content_type= $content_type;
+            $file_attempt->save();
+
+            return $file_attempt->id;
     }
 
 
@@ -43,18 +66,29 @@ class WossopMessageController extends Controller
      * @param user_id the id of the user in the chatlist
      * @return WossopMessage
      */
-    public function fetchUserMessages($user_id)
+    public function fetchUserMessages($user_id,$is_group=0)
     {
-        $auth_user_id = Auth::id();
+            $auth_user_id = Auth::id();
 
-        // If message sent to authenticated user is clicked, set 'is_read' to 1
-        WossopMessage::where(['sender' => $user_id, 'receiver' => $auth_user_id])->update(['is_read' => 1]);
+            // If message sent to authenticated user is clicked, set 'is_read' to 1
+            WossopMessage::where(['sender' => $user_id, 'receiver' => $auth_user_id])->update(['is_read' => 1]);
 
-        $messages =  WossopMessage::where(function ($query) use ($user_id, $auth_user_id) {
-            $query->where('sender', $user_id)->where('receiver', $auth_user_id);
-        })->orWhere(function ($query) use ($user_id, $auth_user_id) {
-            $query->where('sender', $auth_user_id)->where('receiver', $user_id);
-        })->get();
-        return $messages;
+            return WossopMessage::where(function ($query) use ($user_id, $auth_user_id, $is_group) {
+                $query->where('sender', $user_id)->where('receiver', $auth_user_id)->where('is_group', $is_group);
+            })->orWhere(function ($query) use ($user_id, $auth_user_id, $is_group) {
+                $query->where('sender', $auth_user_id)->where('receiver', $user_id)->where('is_group', $is_group);
+            })->get();
+    }
+
+    public function fetchFile($id)
+    {       
+            $file_info = FileAttempt::find($id);
+            if($file_info!=null)
+            return response()->download(storage_path('app/public/'.$file_info->stored_path));
+    }
+
+    public function fetchFileInfo($id)
+    {       
+            return     $file_info = FileAttempt::find($id);
     }
 }

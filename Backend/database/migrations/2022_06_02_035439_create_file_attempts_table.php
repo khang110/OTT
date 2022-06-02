@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateWossopMessagesTable extends Migration
+class CreateFileAttemptsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,12 @@ class CreateWossopMessagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('wossop_messages', function (Blueprint $table) {
+        Schema::create('file_attempts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('receiver');
-            $table->unsignedBigInteger('sender');
-            $table->text('message');
-            $table->boolean('is_read');
-            $table->boolean('is_file');
-            $table->boolean('is_group');
+            $table->text('origin_name');
+            $table->text('extension');
+            $table->text('stored_path');
+            $table->text('content_type');
             $table->timestamps();
         });
     }
@@ -32,6 +30,6 @@ class CreateWossopMessagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('wossop_messages');
+        Schema::dropIfExists('file_attempts');
     }
 }
