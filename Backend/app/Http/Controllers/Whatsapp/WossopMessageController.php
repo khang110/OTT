@@ -91,4 +91,10 @@ class WossopMessageController extends Controller
     {       
             return     $file_info = FileAttempt::find($id);
     }
+
+    public function fetchNewMess()
+    {       
+        $auth_user_id = Auth::id();
+        return WossopMessage::where('receiver',$auth_user_id)->where('is_read',0)->get();
+    }
 }
