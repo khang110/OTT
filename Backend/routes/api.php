@@ -35,7 +35,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/message/{id}/{is_group?}', 'App\Http\Controllers\Whatsapp\WossopMessageController@fetchUserMessages');
 
     //Add group
-    Route::post('/create-channel','App\Http\Controllers\GroupController@store');
+    Route::post('/group','App\Http\Controllers\GroupController@store');
     Route::get('/get-channels','App\Http\Controllers\GroupController@index');
 });
 Route::post('/register', 'App\Http\Controllers\Whatsapp\AuthController@register');

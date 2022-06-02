@@ -49,6 +49,7 @@ class GroupController extends Controller
         $this->group->description = $request->description;
         $this->group->save();
         $members = $request->members;
+        $members = (explode(",",$members));
         foreach ($members as $value) {
             $group_detail = new GroupDetail();
             $group_detail->id_user = (int)$value;
