@@ -1,6 +1,6 @@
-import React from "react";
+import React, {useEffect} from "react";
 import classnames from "classnames";
-
+import { io } from 'socket.io-client';
 // hooks
 import { useRedux } from "../../hooks/index";
 
@@ -12,7 +12,14 @@ import Leftbar from "./Leftbar";
 import ConversationUser from "./ConversationUser/index";
 import UserProfileDetails from "./UserProfileDetails/index";
 import Welcome from "./ConversationUser/Welcome";
+import {APIClient} from '../../api/apiCore';
+import * as url from '../../api/urls';
+//const socket = io('http://192.168.1.37:6000');
 
+const api = new APIClient();
+// const updateSocketId = (userID: string, socketID: string) => {
+//   return api.create(url.POST_UPDATE_SOCKET_ID + "/" + userID + "/" + socketID);
+// };
 interface IndexProps {}
 const Index = (props: IndexProps) => {
   // global store
@@ -23,6 +30,13 @@ const Index = (props: IndexProps) => {
   }));
 
   const { isChannel } = useConversationUserType();
+
+  useEffect(() => {
+    // socket.on('me', (id) => {
+    //   updateSocketId(JSON.parse(localStorage.getItem("authUser")!).user.id, id);
+    //   console.log("1: " + id)
+    // });
+  })
 
   return (
     <>

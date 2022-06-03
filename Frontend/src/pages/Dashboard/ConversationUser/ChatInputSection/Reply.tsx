@@ -15,7 +15,7 @@ interface ReplyProps {
 }
 const Reply = ({ reply, onSetReplyData, chatUserDetails }: ReplyProps) => {
   /*
-  collapse handeling
+  collapse handling
   */
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const onClose = () => {
@@ -32,7 +32,7 @@ const Reply = ({ reply, onSetReplyData, chatUserDetails }: ReplyProps) => {
     ? `${chatUserDetails.firstName} ${chatUserDetails.lastName}`
     : "-";
   const isReplyFromMe =
-    reply && reply.meta.sender + "" === userProfile.uid + "";
+    reply && reply.sender + "" === userProfile.uid + "";
 
   return (
     <Collapse isOpen={isOpen} className="chat-input-collapse replyCollapse">
@@ -43,7 +43,7 @@ const Reply = ({ reply, onSetReplyData, chatUserDetails }: ReplyProps) => {
               <h5 className="conversation-name">
                 {isReplyFromMe ? "You" : replyUserName}
               </h5>
-              {reply?.text && <p className="mb-0">{reply?.text}</p>}
+              {reply?.message && <p className="mb-0">{reply?.message}</p>}
 
               {(reply?.image || reply?.attachments) && (
                 <p className="mb-0">

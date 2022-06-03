@@ -13,7 +13,7 @@ class FirebaseAuthBackend {
         if (user) {
           setLoggeedInUser(user);
         } else {
-          localStorage.removeItem("authUser");
+          //localStorage.removeItem("authUser");
         }
       });
     }

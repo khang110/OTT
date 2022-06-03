@@ -4,8 +4,8 @@ interface BasicDetailsProps {
   chatUserDetails: any;
 }
 const BasicDetails = ({ chatUserDetails }: BasicDetailsProps) => {
-  const fullName = chatUserDetails.firstName
-    ? `${chatUserDetails.firstName} ${chatUserDetails.lastName}`
+  const fullName = chatUserDetails.name
+    ? `${chatUserDetails.name} ${chatUserDetails.name}`
     : "-";
 
   return (

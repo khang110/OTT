@@ -10,6 +10,7 @@ import classnames from "classnames";
 
 // interface
 import { BasicDetailsTypes } from "../../../data/settings";
+import avatar from '../../../assets/assets/img/user.jpg';
 
 // CONSTANTS
 import { STATUS_TYPES } from "../../../constants";
@@ -19,15 +20,14 @@ interface UserProfileProps {
 }
 const UserProfile = ({ basicDetails, status }: UserProfileProps) => {
   const fullName = basicDetails
-    ? `${basicDetails.firstName} ${basicDetails.lastName}`
+    ? `${basicDetails.name}`
     : "-";
-
+  console.log(basicDetails)
+  //console.log(fullName)
   /*
     profile image
     */
-  const [image, setImage] = useState<string>(
-    basicDetails && basicDetails.profile
-  );
+  const [image, setImage] = useState<string>(avatar);
   useEffect(() => {
     if (basicDetails && basicDetails.profile) {
       setImage(basicDetails.profile);
@@ -61,7 +61,7 @@ const UserProfile = ({ basicDetails, status }: UserProfileProps) => {
   }, [status]);
 
   return (
-    <div className="text-center p-3 p-lg-4 border-bottom pt-2 pt-lg-2 mt-n5 position-relative">
+    <div className="text-center p-3 border-bottom pt-2 pt-lg-2 mt-n5 position-relative">
       <div className="mb-3 profile-user">
         <img
           src={image}

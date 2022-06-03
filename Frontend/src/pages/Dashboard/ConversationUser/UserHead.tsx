@@ -45,7 +45,7 @@ const ProfileImage = ({
   const fullName = !isChannel
     ? chatUserDetails.firstName
       ? `${chatUserDetails.firstName} ${chatUserDetails.lastName}`
-      : "-"
+      : chatUserDetails.name
     : chatUserDetails.name;
   const shortName = !isChannel
     ? chatUserDetails.firstName
@@ -314,7 +314,10 @@ const UserHead = ({
   const [isOpenVideoModal, setIsOpenVideoModal] = useState<boolean>(false);
   const onOpenVideo = () => {
     setIsOpenVideoModal(true);
+    navigateToExternalUrl('/call-user?socket_id='+chatUserDetails.socket_id, true);
   };
+  const navigateToExternalUrl = (url: string, shouldOpenNewTab: boolean = true) =>
+    shouldOpenNewTab ? window.open(url, "_blank") : window.location.href = url;
   const onCloseVideo = () => {
     setIsOpenVideoModal(false);
   };
@@ -414,7 +417,7 @@ const UserHead = ({
           </ul>
         </Col>
       </Row>
-      <PinnedAlert onOpenPinnedTab={onOpenPinnedTab} />
+
       {isOpenAudioModal && (
         <AudioCallModal
           isOpen={isOpenAudioModal}

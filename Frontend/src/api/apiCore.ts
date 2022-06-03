@@ -45,14 +45,24 @@ class APIClient {
    * Fetches data from given url
    */
   get = (url: string, params?: {}) => {
-    return axios.get(url, params);
+    return axios.get(url, {
+      params,
+      headers: {'Authorization': 'Bearer '+ JSON.parse(<string>localStorage.getItem('authUser')).token}
+    });
   };
 
   /**
    * post given data to url
    */
   create = (url: string, data?: {}) => {
-    return axios.post(url, data);
+    if(localStorage.getItem('authUser')) {
+      return axios.post(url, data,{
+        headers: {'Authorization': 'Bearer '+ JSON.parse(<string>localStorage.getItem('authUser')).token}
+      });
+    }
+      else {
+      return  axios.post(url, data);
+    }
   };
 
   /**

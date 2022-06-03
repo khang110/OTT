@@ -10,8 +10,8 @@ export const POST_FAKE_REGISTER = "/post-fake-register";
 export const USER_CHANGE_PASSWORD = "/user-change-password";
 
 // profile & settings
-export const GET_PROFILE_DETAILS = "/profile-details";
-export const GET_USER_SETTINGS = "/user-settings";
+export const GET_PROFILE_DETAILS = "api/profile-details";
+export const GET_USER_SETTINGS = "/api/user-settings";
 export const UPDATE_ETTINGS = "/update-user-settings";
 
 // contacts
@@ -29,12 +29,12 @@ export const UPDATE_BOOKMARK = "/bookmarks-update";
 // chats
 export const GET_FAVOURITES = "/get-favourites";
 export const GET_DIRECT_MESSAGES = "/get-direct-messages";
-export const GET_CHANNELS = "/get-channles";
+export const GET_CHANNELS = "/api/get-channels";
 export const ADD_CONTACTS = "/add-contact";
-export const CREATE_CHANNEL = "/create-channel";
-export const GET_CHAT_USER_DETAILS = "/get-user-details";
-export const GET_CHAT_USER_CONVERSATIONS = "/get-user-conversations";
-export const SEND_MESSAGE = "/send-message";
+export const CREATE_CHANNEL = "/api/create-channel";
+export const GET_CHAT_USER_DETAILS = "/api/get-user-details";
+export const GET_CHAT_USER_CONVERSATIONS = "/api/message";
+export const SEND_MESSAGE = "/api/send-message";
 export const RECEIVE_MESSAGE = "/receive-message";
 export const READ_MESSAGE = "/read-message";
 export const RECEIVE_MESSAGE_FROM_USER = "/receive-message-from-user";
@@ -51,9 +51,11 @@ export const DELETE_IMAGE = "/user-delete-img";
 export const GET_CHANNEL_DETAILS = "/get-channel-details";
 
 
-// auth custom lavrel
-export const POST_LOGIN_OTT = "/api/auth/login";
+// auth custom laravel
+export const POST_LOGIN_OTT = "/api/login";
 export const POST_REGISTER_OTT = "/api/auth/register";
 
-// get list contact 
+// get list contact
 export const GET_CONTACTS_OTT = "/api/list-users";
+
+export const POST_UPDATE_SOCKET_ID = "/api/update-socket-id";

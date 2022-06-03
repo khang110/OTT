@@ -9,13 +9,13 @@ interface UserDescriptionProps {
 const UserDescription = ({ basicDetails }: UserDescriptionProps) => {
   return (
     <>
-      <div className="text-muted">
+      {/* <div className="text-muted">
         <p className="mb-4">
           {basicDetails && basicDetails.description
             ? basicDetails.description
             : "-"}
         </p>
-      </div>
+      </div> */}
 
       <div>
         <div className="d-flex py-2">
@@ -24,8 +24,8 @@ const UserDescription = ({ basicDetails }: UserDescriptionProps) => {
           </div>
           <div className="flex-grow-1">
             <p className="mb-0">
-              {basicDetails && basicDetails.fullName
-                ? basicDetails.fullName
+              {basicDetails && basicDetails.name
+                ? basicDetails.name
                 : "-"}
             </p>
           </div>
@@ -42,7 +42,7 @@ const UserDescription = ({ basicDetails }: UserDescriptionProps) => {
           </div>
         </div>
 
-        <div className="d-flex py-2">
+        {/* <div className="d-flex py-2">
           <div className="flex-shrink-0 me-3">
             <i className="bx bx-location-plus align-middle text-muted"></i>
           </div>
@@ -53,7 +53,7 @@ const UserDescription = ({ basicDetails }: UserDescriptionProps) => {
                 : "-"}
             </p>
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );

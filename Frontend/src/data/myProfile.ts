@@ -5,8 +5,7 @@ import img2 from "../assets/images/small/img-2.jpg";
 import img4 from "../assets/images/small/img-4.jpg";
 
 export interface BasicDetailsTypes {
-  firstName: string;
-  lastName: string;
+  name: string;
   title: string;
   description: string;
   fullName: string;
@@ -45,13 +44,11 @@ export interface ProfileDetailsTypes {
 
 const profileDetails: ProfileDetailsTypes = {
   basicDetails: {
-    firstName: "Thong",
-    lastName: "Banh",
+    name: "Thong",
     title: "Front end Developer",
-    description:
-      "If several languages coalesce, the grammar of the resulting language is more simple.",
-    fullName: "Thong Banh",
-    email: "admin@themesbrand.com",
+    description: "",
+    fullName: "",
+    email: "",
     location: "California, USA",
     avatar: avatar1,
     coverImage: image4,

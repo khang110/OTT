@@ -34,10 +34,10 @@ const Index = (props: IndexProps) => {
   return (
     <div className="position-relative">
       {getProfileLoading && !isProfileFetched && <Loader />}
-      <MyProfile basicDetails={profileDetails.basicDetails} />
+      <MyProfile basicDetails={profileDetails} />
 
       <AppSimpleBar className="p-4 profile-desc">
-        <UserDescription basicDetails={profileDetails.basicDetails} />
+        <UserDescription basicDetails={profileDetails} />
         <hr className="my-4" />
 
         <Media media={profileDetails.media} limit={2} />

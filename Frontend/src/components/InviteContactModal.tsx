@@ -65,7 +65,7 @@ const InviteContactModal = ({
   return (
     <Modal isOpen={isOpen} toggle={onClose} tabIndex={-1} centered scrollable>
       <ModalHeader className="modal-title-custom" toggle={onClose}>
-        Add Contact
+        Thêm liên hệ
       </ModalHeader>
       <ModalBody className="p-4">
         <Form>

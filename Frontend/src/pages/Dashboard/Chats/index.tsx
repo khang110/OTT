@@ -76,6 +76,7 @@ const Index = (props: IndexProps) => {
     dispatch(getFavourites());
     dispatch(getDirectMessages());
     dispatch(getChannels());
+    console.log(typeof channels)
   }, [dispatch]);
   useEffect(() => {
     if (isFavouriteContactToggled) {
@@ -206,7 +207,7 @@ const Index = (props: IndexProps) => {
                 <AddButton onClick={openModal} />
               </div>
               <UncontrolledTooltip target="add-contact" placement="bottom">
-                Add Contact
+                Thêm liên hệ
               </UncontrolledTooltip>
             </div>
           </div>
@@ -215,7 +216,7 @@ const Index = (props: IndexProps) => {
               <input
                 type="text"
                 className="form-control bg-light border-0 pe-0"
-                placeholder="Search here.."
+                placeholder="Tìm kiếm"
                 aria-label="Example text with button addon"
                 aria-describedby="searchbtn-addon"
               />
@@ -262,7 +263,7 @@ const Index = (props: IndexProps) => {
                   className="mb-3 px-4 mt-4 font-size-11 text-primary"
                   onClick={() => onChangeTab(CHATS_TABS.ARCHIVE)}
                 >
-                  Archived Contacts{" "}
+                  Địa chỉ liên hệ đã lưu trữ {" "}
                   <i className="bx bxs-archive-in align-middle" />
                 </Link>
               </h5>

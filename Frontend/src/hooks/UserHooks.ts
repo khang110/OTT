@@ -52,7 +52,7 @@ const useContacts = () => {
 
   useEffect(() => {
     if (contacts.length > 0) {
-      const formattedContacts = divideByKey("firstName", contacts);
+      const formattedContacts = divideByKey("name", contacts);
       setCategorizedContacts(formattedContacts);
     }
   }, [contacts]);

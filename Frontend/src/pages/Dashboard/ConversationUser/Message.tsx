@@ -287,7 +287,7 @@ const Message = ({
   const { userProfile } = useProfile();
   const hasImages = message.image && message.image.length;
   const hasAttachments = message.attachments && message.attachments.length;
-  const hasText = message.text;
+  const hasText = message.message;
   const isTyping = false;
 
   const chatUserFullName = chatUserDetails.firstName
@@ -298,20 +298,20 @@ const Message = ({
     ? userProfile.profileImage
     : imagePlaceholder;
   const channeluserProfile =
-    message.meta.userData && message.meta.userData.profileImage
-      ? message.meta.userData.profileImage
+    message.userData && message.userData.profileImage
+      ? message.userData.profileImage
       : imagePlaceholder;
   const chatUserprofile = chatUserDetails.profileImage
     ? chatUserDetails.profileImage
     : imagePlaceholder;
   const profile = isChannel ? channeluserProfile : chatUserprofile;
-  const date = formateDate(message.time, "hh:mmaaa");
-  const isSent = message.meta.sent;
-  const isReceived = message.meta.received;
-  const isRead = message.meta.read;
-  const isForwarded = message.meta.isForwarded;
-  const channdelSenderFullname = message.meta.userData
-    ? `${message.meta.userData.firstName} ${message.meta.userData.lastName}`
+  const date = formateDate(message.created_at, "hh:mmaaa");
+  const isSent = message.sent;
+  const isReceived = message.received;
+  const isRead = message.is_read;
+  const isForwarded = message.isForwarded;
+  const channdelSenderFullname = message.userData
+    ? `${message.userData.firstName} ${message.userData.lastName}`
     : "-";
   const fullName = isChannel ? channdelSenderFullname : chatUserFullName;
   const onDeleteMessage = () => {
@@ -344,10 +344,10 @@ const Message = ({
         </div>
 
         <div className="user-chat-content">
-          {hasImages && message.text && (
+          {hasImages && message.message && (
             <div className="ctext-wrap">
               <div className="ctext-wrap-content">
-                <p className="mb-0 ctext-content">{message.text}</p>
+                <p className="mb-0 ctext-content">{message.message}</p>
               </div>
             </div>
           )}
@@ -393,7 +393,7 @@ const Message = ({
                   )}
 
                   {hasText && (
-                    <p className="mb-0 ctext-content">{message.text}</p>
+                    <p className="mb-0 ctext-content">{message.message}</p>
                   )}
 
                   {/* typing start */}

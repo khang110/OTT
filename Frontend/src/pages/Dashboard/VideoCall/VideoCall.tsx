@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import classnames from "classnames";
 import { Button } from "reactstrap";
-
 // interface
 import { CallItem } from "../../../data/calls";
 import { formateDate } from "../../../utils/index";

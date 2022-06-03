@@ -1,6 +1,6 @@
 // types
 import { ChatsActionTypes, ChatsState } from "./types";
-
+import Pusher from "pusher-js";
 export const INIT_STATE: ChatsState = {
   favourites: [],
   directMessages: [],
