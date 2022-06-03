@@ -60,3 +60,4 @@ Route::group([
 
 //users list
 Route::get('/list-users', [App\Http\Controllers\UsersController::class, 'index']);
+Route::get('/message/file/{id}', 'App\Http\Controllers\Whatsapp\WossopMessageController@fetchFile');
