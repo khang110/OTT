@@ -23,7 +23,8 @@ class GroupController extends Controller
 
     public function index()
     {
-        //
+        $allgroup = Group::all();
+        return $allgroup;
     }
 
     /**
@@ -68,7 +69,7 @@ class GroupController extends Controller
      */
     public function show(Group $group)
     {
-        //
+        
     }
 
     /**
