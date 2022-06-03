@@ -14,7 +14,7 @@ interface RepliedMessageProps {
 function RepliedMessage({ isFromMe, message, fullName }: RepliedMessageProps) {
   const { userProfile } = useProfile();
 
-  const isReplyFromMe = message.meta.sender + "" === userProfile.uid + "";
+  const isReplyFromMe = message.sender + "" === userProfile.uid + "";
   return (
     <div className="">
       <div className="replymessage-block mb-2 d-flex align-items-start">
@@ -22,8 +22,8 @@ function RepliedMessage({ isFromMe, message, fullName }: RepliedMessageProps) {
           <h5 className="conversation-name">
             {isReplyFromMe ? "You" : fullName}
           </h5>
-          {message.replyOf?.text && (
-            <p className="mb-0">{message.replyOf?.text}</p>
+          {message.replyOf?.message && (
+            <p className="mb-0">{message.replyOf?.message}</p>
           )}
           {(message.replyOf?.image || message.replyOf?.attachments) && (
             <p className="mb-0">

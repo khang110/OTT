@@ -23,7 +23,7 @@ import { TABS } from "../../constants/index";
 import LightDarkMode from "../../components/LightDarkMode";
 
 //images
-import avatar1 from "../../assets/images/users/avatar-1.jpg";
+import avatar1 from "../../assets/images/users/user.jpg";
 
 // menu
 import { MENU_ITEMS, MenuItemType } from "./menu";

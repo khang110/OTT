@@ -9,6 +9,7 @@ import Register from "../pages/Authentication/Register";
 import RecoverPassword from "../pages/Authentication/RecoverPassword";
 import ChangePassword from "../pages/Authentication/ChangePassword";
 import LockScreen from "../pages/Authentication/LockScreen";
+import CallUser from "../pages/VideoCall/index";
 
 // dashboard
 import Dashboard from "../pages/Dashboard/index";
@@ -33,6 +34,7 @@ const privateRoutes: Array<RouteProps> = [
   { path: "/pages-starter", component: StarterPage },
   { path: "/dashboard", component: Dashboard },
   { path: "/", exact: true, component: Root },
+  { path: "/call-user", component: CallUser },
 ];
 
 export { publicRoutes, privateRoutes };

@@ -26,7 +26,7 @@ const ListHeader = ({ openModal, search, onChangeSearch }: ListHeaderProps) => {
             </Button>
           </div>
           <UncontrolledTooltip target="add-contact-button" placement="bottom">
-            Add Contact
+            Thêm liên hệ
           </UncontrolledTooltip>
         </div>
       </div>

@@ -116,7 +116,7 @@ const Index = (props: IndexProps) => {
     dispatch(getSettings());
   }, [dispatch]);
 
-  const [settings, setSettings] = useState<SettingsTypes>(settingsData);
+  const [settings, setSettings] = useState<null | any>(settingsData);
   useEffect(() => {
     setSettings(settingsData);
   }, [settingsData]);
@@ -145,7 +145,7 @@ const Index = (props: IndexProps) => {
       value: SETTINGS_COLLAPSES.PROFILE,
       label: "Personal Info",
       icon: "bx bxs-user",
-      component: <PersonalInfo basicDetails={settings.basicDetails} />,
+      component: <PersonalInfo basicDetails={settings} />,
     },
     {
       value: SETTINGS_COLLAPSES.THEME,
@@ -197,10 +197,10 @@ const Index = (props: IndexProps) => {
   return (
     <div className="position-relative">
       {getSettingsLoading && <Loader />}
-      <UserCoverImage basicDetails={settings.basicDetails} />
+      <UserCoverImage basicDetails={settings} />
 
       <UserProfile
-        basicDetails={settings.basicDetails}
+        basicDetails={settings}
         status={settings.status}
       />
       {/* Start User profile description */}

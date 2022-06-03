@@ -18,6 +18,8 @@ import ForwardModal from "../../../components/ForwardModal";
 
 // actions
 import { forwardMessage, deleteImage } from "../../../redux/actions";
+import {getLoggedinUser} from "../../../api/apiCore";
+import Pusher from "pusher-js";
 interface ConversationProps {
   chatUserConversations: any;
   chatUserDetails: any;
@@ -45,8 +47,8 @@ const Conversation = ({
   );
 
   const messages =
-    chatUserConversations.messages && chatUserConversations.messages.length
-      ? chatUserConversations.messages
+    chatUserConversations && chatUserConversations.length
+      ? chatUserConversations
       : [];
 
   const ref = useRef<any>();
@@ -64,17 +66,16 @@ const Conversation = ({
       }
     }
   }, [ref]);
-
   useEffect(() => {
     if (ref && ref.current) {
       ref.current.recalculate();
     }
   }, []);
   useEffect(() => {
-    if (chatUserConversations.messages) {
+    if (chatUserConversations.length) {
       scrollElement();
     }
-  }, [chatUserConversations.messages, scrollElement]);
+  }, [chatUserConversations.length, scrollElement]);
 
   /*
   forward message
@@ -125,7 +126,7 @@ const Conversation = ({
         id="chat-conversation-list"
       >
         {(messages || []).map((message: MessagesTypes, key: number) => {
-          const isFromMe = message.meta.sender + "" === userProfile.uid + "";
+          const isFromMe = message.sender + "" === userProfile.user.id + "";
           return (
             <Message
               message={message}

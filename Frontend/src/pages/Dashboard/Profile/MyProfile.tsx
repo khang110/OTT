@@ -9,29 +9,30 @@ import {
 
 // interface
 import { BasicDetailsTypes } from "../../../data/myProfile";
+import coverimg from '../../../assets/assets/img/blog/blog-02.jpg';
+import avatar from '../../../assets/assets/img/user.jpg';
 
 interface MyProfileProps {
-  basicDetails: BasicDetailsTypes;
+  basicDetails: any;
 }
 const MyProfile = ({ basicDetails }: MyProfileProps) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
   const toggle = () => setDropdownOpen(!dropdownOpen);
 
   const fullName = basicDetails
-    ? `${basicDetails.firstName} ${basicDetails.lastName}`
+    ? `${basicDetails.name}`
     : "-";
   return (
     <>
       <div className="user-profile-img">
-        {basicDetails && basicDetails.coverImage && (
+        {basicDetails && basicDetails.coverImage ? (
           <img
             src={basicDetails.coverImage}
             className="profile-img"
             style={{ height: "160px" }}
             alt=""
           />
-        )}
+        ): <img src={coverimg} className="profile-img" style={{ height: "160px" }} alt=""/>}
 
         <div className="overlay-content">
           <div>
@@ -80,20 +81,20 @@ const MyProfile = ({ basicDetails }: MyProfileProps) => {
         </div>
       </div>
 
-      <div className="text-center p-3 p-lg-4 border-bottom pt-2 pt-lg-2 mt-n5 position-relative">
+      <div className="text-center p-2 border-bottom pt-2 pt-lg-2 mt-n5 position-relative">
         <div className="mb-lg-3 mb-2">
-          {basicDetails && basicDetails.coverImage && (
+          {basicDetails && basicDetails.coverImage ? (
             <img
               src={basicDetails.avatar}
               className="rounded-circle avatar-lg img-thumbnail"
               alt=""
             />
-          )}
+          ):  <img src={avatar} className="rounded-circle avatar-lg img-thumbnail" alt=""/>}
         </div>
 
         <h5 className="font-size-16 mb-1 text-truncate">{fullName}</h5>
         <p className="text-muted font-size-14 text-truncate mb-0">
-          {basicDetails && basicDetails.title ? basicDetails.title : "-"}
+          {basicDetails && basicDetails.about ? basicDetails.about : "-"}
         </p>
       </div>
     </>

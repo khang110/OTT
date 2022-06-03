@@ -16,17 +16,15 @@ export interface ImageTypes {
 }
 export interface MessagesTypes {
   mId: number;
-  text?: string;
-  time: string;
-  meta: {
-    receiver: string | number;
-    sender: string | number;
-    userData?: ContactTypes;
-    sent: boolean;
-    received: boolean;
-    read: boolean;
-    isForwarded?: boolean;
-  };
+  message?: string;
+  created_at: string;
+  receiver: string | number;
+  sender: string | number;
+  userData?: ContactTypes;
+  sent: boolean;
+  received: boolean;
+  is_read: boolean;
+  isForwarded?: boolean;
   attachments?: AttachmentTypes[];
   image?: ImageTypes[];
   replyOf?: MessagesTypes;

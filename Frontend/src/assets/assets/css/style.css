@@ -1,6 +1,6 @@
 /*
 Author       : Dreamguys
-最新最全最好的Bootstrap模板：http://www.bootstrapmb.com
+锟斤拷锟斤拷锟斤拷全锟斤拷玫锟紹ootstrap模锟藉：http://www.bootstrapmb.com
 Version      : 1.0
 */
 
@@ -67,6 +67,7 @@ body {
 	background-color: #fafafa;
 	overflow-x: hidden;
 	height: 100%;
+	margin: 0!important;
 }
 h1,
 h2,
@@ -1420,9 +1421,9 @@ ul.chat-user-total li i.old-users {
 	margin: 0;
 }
 .contact-list > li {
-	border-bottom: 1px solid #eaeaea;
+	/* border-bottom: 1px solid #eaeaea; */
 	border-radius: inherit;
-	padding: 10px;
+	/* padding: 10px; */
 	background-color:#fff;
 }
 .contact-cont {
@@ -4020,14 +4021,14 @@ blockquote p {
 
 /*-----------------
 	33. UI Kit
-    最新最全最好的Bootstrap模板：http://www.bootstrapMB.com
+    锟斤拷锟斤拷锟斤拷全锟斤拷玫锟紹ootstrap模锟藉：http://www.bootstrapMB.com
 -----------------------*/
 
 .pagination-box .pagination {
 	margin-top: 0;
 }
 .tab-content {
-	padding-top: 20px;
+	/* padding-top: 20px; */
 }
 
 /*-----------------

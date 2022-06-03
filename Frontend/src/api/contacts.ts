@@ -12,7 +12,7 @@ const inviteContact = (data: object) => {
 };
 
 const getContactsOTT = (filters?: object) => {
-  return api.get(url.GET_CONTACTS_OTT, filters);
+  return api.get(`${url.GET_CONTACTS_OTT}/${JSON.parse(<string>localStorage.getItem('authUser')).user.id}`, filters);
 };
 
 export { getContacts, getContactsOTT, inviteContact };

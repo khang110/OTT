@@ -3,14 +3,12 @@ import { Label, UncontrolledTooltip } from "reactstrap";
 
 // interface
 import { BasicDetailsTypes } from "../../../data/settings";
-
+import coverimg from '../../../assets/assets/img/blog/blog-02.jpg';
 interface UserCoverImageProps {
   basicDetails: BasicDetailsTypes;
 }
 const UserCoverImage = ({ basicDetails }: UserCoverImageProps) => {
-  const [image, setImage] = useState<string>(
-    basicDetails && basicDetails.coverImage
-  );
+  const [image, setImage] = useState<string>(coverimg);
   useEffect(() => {
     if (basicDetails && basicDetails.coverImage) {
       setImage(basicDetails.coverImage);
@@ -36,7 +34,7 @@ const UserCoverImage = ({ basicDetails }: UserCoverImageProps) => {
           <div className="user-chat-nav p-3">
             <div className="d-flex w-100 align-items-center">
               <div className="flex-grow-1">
-                <h5 className="text-white mb-0">Settings</h5>
+                <h5 className="text-white mb-0">Cài đặt</h5>
               </div>
               <div className="flex-shrink-0">
                 <div

@@ -38,7 +38,7 @@ const ContactItem = ({
   selected,
   onSelectContact,
 }: ContactItemProps) => {
-  const fullName = `${contact.firstName} ${contact.lastName}`;
+  const fullName = `${contact.name}`;
   const onCheck = (checked: boolean) => {
     onSelectContact(contact.id, checked);
   };
@@ -203,7 +203,7 @@ const AddGroupModal = ({
               type="text"
               className="form-control"
               id="addgroupname-input"
-              placeholder="Enter Group Name"
+              placeholder="Nhập tên nhóm"
               value={data.channelName || ""}
               onChange={(e: any) => {
                 onDataChange("channelName", e.target.value);

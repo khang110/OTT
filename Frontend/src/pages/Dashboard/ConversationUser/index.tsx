@@ -29,14 +29,18 @@ import { MessagesTypes } from "../../../data/messages";
 
 // dummy data
 import { pinnedTabs } from "../../../data/index";
+import {getLoggedinUser} from "../../../api/apiCore";
+import Pusher from "pusher-js";
+import { formateDate } from "../../../utils/index";
+import UserProfile from "../Settings/UserProfile";
 
 interface IndexProps {
   isChannel: boolean;
 }
+
 const Index = ({ isChannel }: IndexProps) => {
   // global store
   const { dispatch, useAppSelector } = useRedux();
-
   const {
     chatUserDetails,
     chatUserConversations,
@@ -45,6 +49,7 @@ const Index = ({ isChannel }: IndexProps) => {
     isMessageForwarded,
     isUserMessagesDeleted,
     isImageDeleted,
+    selectedChat
   } = useAppSelector(state => ({
     chatUserDetails: state.Chats.chatUserDetails,
     chatUserConversations: state.Chats.chatUserConversations,
@@ -53,7 +58,11 @@ const Index = ({ isChannel }: IndexProps) => {
     isMessageForwarded: state.Chats.isMessageForwarded,
     isUserMessagesDeleted: state.Chats.isUserMessagesDeleted,
     isImageDeleted: state.Chats.isImageDeleted,
+    selectedChat: state.Chats.selectedChat,
   }));
+
+  //console.log(selectedChat)
+  //console.log(chatUserDetails)
 
   const onOpenUserDetails = () => {
     dispatch(toggleUserDetailsTab(true));
@@ -65,10 +74,10 @@ const Index = ({ isChannel }: IndexProps) => {
   const { userProfile } = useProfile();
 
   /*
-  reply handeling
+  reply handling
   */
   const [replyData, setReplyData] = useState<
-    null | MessagesTypes | undefined
+    null | any | undefined
   >();
   const onSetReplyData = (reply: null | MessagesTypes | undefined) => {
     setReplyData(reply);
@@ -78,21 +87,28 @@ const Index = ({ isChannel }: IndexProps) => {
   send message
   */
   const onSend = (data: any) => {
-    let params: any = {
-      text: data.text && data.text,
-      time: new Date().toISOString(),
-      image: data.image && data.image,
-      attachments: data.attachments && data.attachments,
-      meta: {
-        receiver: chatUserDetails.id,
-        sender: userProfile.uid,
-      },
-    };
+    console.log(data)
+    const formData = new FormData();
+    // let params: any = {
+    //   message: data.text && data.text,
+    //   time: new Date().toISOString(),
+    //   image: data.image && data.image,
+    //   file: data.attachments[0].downloadLink && data.attachments[0].downloadLink,
+    //   receiver_id: chatUserDetails.id,
+    //   sender: userProfile.id,
+    // };
+    formData.append("message", data.text && data.text);
+    formData.append("time", new Date().toISOString());
+    formData.append("receiver_id", chatUserDetails.id);
+    formData.append("sender", userProfile.id);
+    if (data.attachments) {
+      formData.append("file", data.attachments[0].downloadLink && data.attachments[0].downloadLink);
+    }
     if (replyData && replyData !== null) {
-      params["replyOf"] = replyData;
+      formData.append("replyOf", replyData);
     }
 
-    dispatch(onSendMessage(params));
+    dispatch(onSendMessage(formData));
     if (!isChannel) {
       setTimeout(() => {
         dispatch(receiveMessage(chatUserDetails.id));
@@ -105,6 +121,53 @@ const Index = ({ isChannel }: IndexProps) => {
       }, 2000);
     }
     setReplyData(null);
+
+    let pusher: Pusher;
+// @ts-ignore
+    pusher = new Pusher('209d4dd42254dc67e057', {
+      cluster: 'ap1'
+    });
+    Pusher.logToConsole = true;
+    const channel = pusher.subscribe('chat');
+    channel.bind('send', (data: any) => {
+      if(getLoggedinUser().user.id == data.data.receiver) {
+        const conv = document.getElementById("chat-conversation-list");
+        const li = document.createElement("li");
+        li.setAttribute('class','chat-list');
+        const conversation_list = document.createElement("div");
+        conversation_list.setAttribute('class','conversation-list')
+        const chat_avatar = document.createElement("div");
+        chat_avatar.setAttribute('class','chat-avatar')
+        const user_chat_content = document.createElement("div");
+        user_chat_content.setAttribute('class','user-chat-content')
+        const ctext_wrap = document.createElement("div");
+        ctext_wrap.setAttribute('class','ctext-wrap')
+        const ctext_wrap_content = document.createElement("div");
+        ctext_wrap_content.setAttribute('class','ctext-wrap-content');
+        const mb_0_ctext_content = document.createElement("p");
+        mb_0_ctext_content.setAttribute('class','mb-0 ctext-content');
+        mb_0_ctext_content.innerText = data.data.message;
+        ctext_wrap_content.appendChild(mb_0_ctext_content);
+        const conversation_name = document.createElement("div");
+        conversation_name.setAttribute('class','conversation-name');
+        conversation_name.innerHTML = "-" + '<small className="text-muted mb-0 ms-2">' + formateDate(data.data.created_at) + '</small>';
+        user_chat_content.appendChild(conversation_name);
+        ctext_wrap.appendChild(ctext_wrap_content);
+        user_chat_content.appendChild(ctext_wrap);
+        conversation_list.appendChild(chat_avatar);
+        conversation_list.appendChild(user_chat_content);
+        li.appendChild(conversation_list);
+        console.log(chatUserDetails);
+        console.log(userProfile);
+        console.log('login_id_'+getLoggedinUser().user.id);
+        console.log('receiver_id_'+data.data.receiver);
+        console.log(data.data.sender)
+        console.log(chatUserDetails.id)
+        if(conv && (data.data.sender == chatUserDetails.id)) {
+          conv.appendChild(li);
+        }
+      }
+    });
   };
 
   useEffect(() => {
@@ -165,5 +228,4 @@ const Index = ({ isChannel }: IndexProps) => {
     </>
   );
 };
-
 export default Index;

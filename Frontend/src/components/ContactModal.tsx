@@ -164,14 +164,14 @@ const ContactModal = ({ isOpen, onClose, onAddContact }: ContactModalProps) => {
       className="contactModal"
     >
       <ModalHeader className="modal-title-custom" toggle={onClose}>
-        Add Contact
+        Thêm liên hệ
       </ModalHeader>
       <ModalBody className="p-4">
         <InputGroup className="mb-4">
           <Input
             type="text"
             className="form-control bg-light border-0 pe-0"
-            placeholder="Search here.."
+            placeholder="Tìm kiếm.."
             aria-label="Example text with button addon"
             aria-describedby="contactSearchbtn-addon"
             value={search || ""}

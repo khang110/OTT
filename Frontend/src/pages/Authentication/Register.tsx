@@ -40,10 +40,10 @@ const Register = (props: RegisterProps) => {
     yup.object().shape({
       email: yup
         .string()
-        .email("This value should be a valid email.")
-        .required("Please Enter E-mail."),
-      username: yup.string().required("Please Enter E-mail."),
-      password: yup.string().required("Please Enter Password."),
+        .email("Giá trị này phải là một email hợp lệ.")
+        .required("Vui lòng nhập E-mail."),
+      username: yup.string().required("Vui lòng nhập E-mail."),
+      password: yup.string().required("Vui lòng nhập E-mail"),
     })
   );
 

@@ -3,8 +3,7 @@ import img4 from "../assets/images/small/img-4.jpg";
 import { DISPLAY_TYPES, STATUS_TYPES } from "../constants";
 
 export interface BasicDetailsTypes {
-  firstName: string;
-  lastName: string;
+  name: string;
   profile: string;
   coverImage: string;
   email: string;
@@ -42,8 +41,7 @@ export interface SettingsTypes {
 
 let settings: SettingsTypes = {
   basicDetails: {
-    firstName: "Kathryn",
-    lastName: "Swarey",
+    name: "Swarey",
     profile: avatar1,
     coverImage: img4,
     email: "adc@123.com",

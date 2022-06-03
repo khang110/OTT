@@ -31,14 +31,14 @@ const ForwardMessage = ({
     ? `${chatUserDetails.firstName} ${chatUserDetails.lastName}`
     : "-";
   const isReplyFromMe =
-    forwardData && forwardData.meta.sender + "" === userProfile.uid + "";
+    forwardData && forwardData.sender + "" === userProfile.id + "";
 
   return (
     <div className="replymessage-block mb-2">
       <h5 className="conversation-name">
         {isReplyFromMe ? "You" : replyUserName}
       </h5>
-      {forwardData?.text && <p className="mb-0">{forwardData?.text}</p>}
+      {forwardData?.message && <p className="mb-0">{forwardData?.message}</p>}
 
       {(forwardData?.image || forwardData?.attachments) && (
         <p className="mb-0">
@@ -267,7 +267,7 @@ const ForwardModal = ({
           <input
             type="text"
             className="form-control bg-light border-0 pe-0"
-            placeholder="Search here.."
+            placeholder="Tìm kiếm ..."
             aria-label="Example text with button addon"
             aria-describedby="forwardSearchbtn-addon"
             value={search || ""}

@@ -72,14 +72,14 @@ const Login = (props: LoginProps) => {
 
   const resolver = yupResolver(
     yup.object().shape({
-      email: yup.string().required("Please Enter E-mail."),
-      password: yup.string().required("Please Enter Password."),
+      email: yup.string().required("Vui lòng nhập E-mail."),
+      password: yup.string().required("Xin vui lòng nhập mật khẩu."),
     })
   );
 
   const defaultValues: any = {
-    email: "anhkhang110@gmail.com",
-    password: "12345678",
+    email: "",
+    password: "",
   };
 
   const methods = useForm({ defaultValues, resolver });
@@ -192,87 +192,21 @@ const Login = (props: LoginProps) => {
                   Đăng nhập
                 </Button>
               </div>
-
-              <div className="mt-4 text-center">
-                <div className="signin-other-title">
-                  <h5 className="font-size-14 mb-4 title">Đăng nhập với</h5>
-                </div>
-                <Row className="">
-                  <div className="col-4">
-                    <div>
-                      <FacebookLogin
-                        appId={config.FACEBOOK.APP_ID}
-                        autoLoad={false}
-                        callback={facebookResponse}
-                        render={(renderProps: any) => (
-                          <button
-                            type="button"
-                            className="btn btn-light w-100"
-                            id="facebook"
-                            onClick={renderProps.onClick}
-                          >
-                            <i className="mdi mdi-facebook text-indigo"></i>
-                          </button>
-                        )}
-                      />
-                    </div>
-                    <UncontrolledTooltip placement="top" target="facebook">
-                      Facebook
-                    </UncontrolledTooltip>
-                  </div>
-                  <div className="col-4">
-                    <div>
-                      <button
-                        type="button"
-                        className="btn btn-light w-100"
-                        id="twitter"
-                      >
-                        <i className="mdi mdi-twitter text-info"></i>
-                      </button>
-                    </div>
-                    <UncontrolledTooltip placement="top" target="twitter">
-                      Twitter
-                    </UncontrolledTooltip>
-                  </div>
-                  <div className="col-4">
-                    <div>
-                      <GoogleLogin
-                        clientId={
-                          config.GOOGLE.CLIENT_ID ? config.GOOGLE.CLIENT_ID : ""
-                        }
-                        render={renderProps => (
-                          <button
-                            type="button"
-                            className="btn btn-light w-100"
-                            id="google"
-                            onClick={renderProps.onClick}
-                          >
-                            <i className="mdi mdi-google text-danger"></i>
-                          </button>
-                        )}
-                        onSuccess={googleResponse}
-                        onFailure={() => {}}
-                      />
-                    </div>
-                    <UncontrolledTooltip placement="top" target="google">
-                      Google
-                    </UncontrolledTooltip>
-                  </div>
-                </Row>
-              </div>
             </Form>
-
-            <div className="mt-5 text-center text-muted">
-              <p>
-                Chưa có tài khoản ?{" "}
-                <Link
-                  to="/auth-register"
-                  className="fw-medium text-decoration-underline"
-                >
-                  {" "}
-                  Đăng ký
-                </Link>
-              </p>
+          </div>
+        </Col>
+        <Col xl={9} lg={8}>
+          <div className="authentication-page-content">
+            <div className="d-flex flex-column h-100 px-4 pt-4">
+              <Row className="">
+                <Col xl={12}>
+                  <div className="text-center text-muted p-4">
+                    <p className="mb-0">
+                      Ứng dụng OTT Sở điện lực Bình Thuận
+                    </p>
+                  </div>
+                </Col>
+              </Row>
             </div>
           </div>
         </Col>

@@ -41,8 +41,8 @@ const RecoverPassword = (props: RecoverPasswordProps) => {
     yup.object().shape({
       email: yup
         .string()
-        .email("This value should be a valid email.")
-        .required("Please Enter E-mail."),
+        .email("This value should be a valid email")
+        .required("Vui lòng nhập E-mail"),
     })
   );
 
