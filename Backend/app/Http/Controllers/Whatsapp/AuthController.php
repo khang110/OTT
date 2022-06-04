@@ -227,7 +227,7 @@ class AuthController extends Controller
     public function updateUserDp(Request $request)
     {
             $user = Auth::user();
-        if ($request->hasFile('image')) {
+        if ($request->hasFile('file')) {
 
             $file = $request->file('file');
             $origin_name = $file->getClientOriginalName();
