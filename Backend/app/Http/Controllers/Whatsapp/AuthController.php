@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 
 use App\Events\UpdateLoginTime;
+use App\Models\FileAttempt;
+
 
 
 use App\Models\User;
