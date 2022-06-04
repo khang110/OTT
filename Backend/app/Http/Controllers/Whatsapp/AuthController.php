@@ -197,8 +197,16 @@ class AuthController extends Controller
 
     public function updateUserInfo(Request $request)
     {
+        
+      //  $update = Auth::user()->update([$request->field => $request->value]);
+      $update = Auth::user();
+      $update->fill([
+        'name' => $request->name ? $request->name : Auth::user()->name,
+        'email' => $request->email ? $request->email : Auth::user()->email
+    ]);
+        $update->save();
+    //return    $request;
 
-        $update = Auth::user()->update([$request->field => $request->value]);
         return $update;
     }
 
