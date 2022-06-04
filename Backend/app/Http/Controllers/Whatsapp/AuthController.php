@@ -243,10 +243,12 @@ class AuthController extends Controller
             $file_attempt->content_type= $content_type;
             $file_attempt->save();
 
-            $update = $user->fill(['avatar_path' => $file_attempt->stored_path]);
+            
+            $update = $user->fill(['avatar_path' => $file_attempt->id]);
             $update->save();
 
-            return $update;
+            return true;
         }
+
     }
 }
