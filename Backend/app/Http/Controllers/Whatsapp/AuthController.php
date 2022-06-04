@@ -202,7 +202,9 @@ class AuthController extends Controller
       $update = Auth::user();
       $update->fill([
         'name' => $request->name ? $request->name : Auth::user()->name,
-        'email' => $request->email ? $request->email : Auth::user()->email
+        'email' => $request->email ? $request->email : Auth::user()->email,
+        'about' => $request->about ? $request->about : Auth::user()->about
+
     ]);
         $update->save();
     //return    $request;
