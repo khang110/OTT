@@ -224,21 +224,25 @@ class AuthController extends Controller
      */
     public function updateUserDp(Request $request)
     {
-
+            $user = Auth::user();
         if ($request->hasFile('image')) {
 
-            $request->validate([
-                'id' => 'required',
-                'image' => 'required|file|mimes:jpeg,png|max:10000',
-            ]);
+            $file = $request->file('file');
+            $origin_name = $file->getClientOriginalName();
+            $extension = $file->extension();
+            $stored_path =  explode("/", $file->store('public'));
+            $content_type = $file->getClientMimeType();
 
-            $user = Auth::user();
-            // Create a file name to store the avatar
-            $file_name =  strtolower(explode(" ", $user->name)[0]) . '_' . $user->id . '_dp';
-            $extension = $request->file('image')->extension();
-            $path = $request->file('image')->storePubliclyAs('user_avatar', $file_name . '.' . $extension, 's3');
+            $file_attempt = new FileAttempt();
 
-            $update = $user->update(['avatar_path' => $path]);
+            $file_attempt->origin_name = $origin_name;
+            $file_attempt->extension = $extension;
+            $file_attempt->stored_path = $stored_path[1];
+            $file_attempt->content_type= $content_type;
+            $file_attempt->save();
+
+            $update = $user->fill(['avatar_path' => $file_attempt->stored_path]);
+            $update->save();
 
             return $update;
         }

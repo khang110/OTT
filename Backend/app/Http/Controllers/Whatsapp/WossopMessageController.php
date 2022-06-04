@@ -87,6 +87,13 @@ class WossopMessageController extends Controller
             return response()->download(storage_path('app/public/'.$file_info->stored_path));
     }
 
+    public function fetchFileB($id)
+    {          
+            $file_info = FileAttempt::find($id);
+            if($file_info!=null)
+            return response()->file(storage_path('app/public/'.$file_info->stored_path));
+    }
+
     public function fetchFileInfo($id)
     {       
             return     $file_info = FileAttempt::find($id);

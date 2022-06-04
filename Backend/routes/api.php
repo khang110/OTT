@@ -29,6 +29,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     // Messaging Endpoints
     Route::get('/message/file/{id}', 'App\Http\Controllers\Whatsapp\WossopMessageController@fetchFile');
+    //Route::get('/message/fileb/{id}', 'App\Http\Controllers\Whatsapp\WossopMessageController@fetchFileB');
+
     Route::get('/message/file-info/{id}', 'App\Http\Controllers\Whatsapp\WossopMessageController@fetchFileInfo');
     Route::get('/message', 'App\Http\Controllers\Whatsapp\WossopMessageController@fetchNewMess');
     Route::post('/message', 'App\Http\Controllers\Whatsapp\WossopMessageController@sendMessage');
@@ -61,3 +63,4 @@ Route::group([
 //users list
 Route::get('/list-users', [App\Http\Controllers\UsersController::class, 'index']);
 Route::get('/message/file/{id}', 'App\Http\Controllers\Whatsapp\WossopMessageController@fetchFile');
+
